@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.transaction.Transactional;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,9 +22,11 @@ import lombok.NoArgsConstructor;
 public class News {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	private String titre;
 	@OneToMany(mappedBy = "news")
 	private Collection<ImageNews> imageNews;
 	@OneToMany(mappedBy = "news")
+	@JsonProperty(access=Access.WRITE_ONLY)
 	private Collection<Resultat> resultat;
 
 }

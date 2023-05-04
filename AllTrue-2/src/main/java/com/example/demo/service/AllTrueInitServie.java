@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
 import java.util.Date;
+import java.util.List;
 
+import com.example.demo.entity.Resultat;
 import com.example.demo.entity.Role;
 import com.example.demo.entity.Utilisateur;
 
@@ -10,5 +12,7 @@ public interface AllTrueInitServie {
 	public Role save(Role role);
 	public Utilisateur loadUserByUsername(String username);
 	public void addRoleToUser(String email, String rolename);
-
+	public void lancerRecher(String titre);
+	public Resultat getResultat();
+	public List<Resultat> historique();
 }

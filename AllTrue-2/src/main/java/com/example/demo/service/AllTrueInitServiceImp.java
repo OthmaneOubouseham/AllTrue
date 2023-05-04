@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -9,9 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.example.demo.dao.ClientRepository;
+import com.example.demo.dao.NewsRepository;
+import com.example.demo.dao.Resultatrepository;
 import com.example.demo.dao.RoleRepository;
 import com.example.demo.dao.UtilisateurRepository;
 import com.example.demo.entity.Client;
+import com.example.demo.entity.News;
+import com.example.demo.entity.Resultat;
 import com.example.demo.entity.Role;
 import com.example.demo.entity.Utilisateur;
 
@@ -27,6 +33,10 @@ public class AllTrueInitServiceImp implements AllTrueInitServie{
 	public BCryptPasswordEncoder bCryptPasswordEncoder;
 	@Autowired
 	public RoleRepository roleRepository;
+	@Autowired
+	public Resultatrepository resultatrepository;
+	@Autowired
+	public NewsRepository newsRepository;
 
 
 	@Override
@@ -68,6 +78,29 @@ public class AllTrueInitServiceImp implements AllTrueInitServie{
 		Utilisateur user = utilisateurRepository.findUtilisateurByEmail(email);
 		Role role = roleRepository.findByRole(rolename);
 		user.getRoles().add(role);
+	}
+	@Override
+	public void lancerRecher(String titre) {
+		News news = new News();
+		news.setTitre(titre);
+		Resultat resultat = new Resultat();
+		resultat.setNews(news);
+		newsRepository.save(news);
+		resultatrepository.save(resultat);
+		
+	}
+	@Override
+	public Resultat getResultat() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<Resultat> historique() {
+		List<Resultat> historiques = new ArrayList<>();
+		resultatrepository.findAll().forEach(re->{
+			historiques.add(re);
+		});
+		return historiques;
 	}
 
 }

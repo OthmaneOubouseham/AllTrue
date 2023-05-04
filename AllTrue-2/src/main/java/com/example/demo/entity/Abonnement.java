@@ -11,6 +11,9 @@ import javax.persistence.OneToMany;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,5 +28,6 @@ public class Abonnement {
 	private Date dateDebut;
 	private Date dateFin;
 	@OneToMany(mappedBy = "abonnement")
+	@JsonProperty(access=Access.READ_WRITE)
 	private Collection<Utilisateur> utilisateur;
 }
