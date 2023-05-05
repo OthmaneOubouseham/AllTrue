@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entity.Client;
 import com.example.demo.entity.Resultat;
 import com.example.demo.entity.Utilisateur;
 import com.example.demo.service.AllTrueInitServiceImp;
@@ -47,5 +48,23 @@ public class AllTrueRestControleur {
 	public List<Resultat> getHistoriques(){
 		return this.service.historique();
 	}
+	@GetMapping("/clients")
+	public List<Client> getClients(){
+		return this.service.getClients();
+	}
+	@PostMapping("/offStatut")
+	public String offStatut(@RequestBody String email) {
+		return this.service.offStatut(email);
+	}
+	@PostMapping("/onStatut")
+	public String onStatut(@RequestBody String email) {
+		return this.service.onStatut(email);
+	}
+	@GetMapping("/countClients")
+	public long CountClients() {
+		return this.service.getCountClient();
+		
+	}
+	
 
 }

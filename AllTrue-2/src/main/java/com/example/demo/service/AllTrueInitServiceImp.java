@@ -102,5 +102,34 @@ public class AllTrueInitServiceImp implements AllTrueInitServie{
 		});
 		return historiques;
 	}
+	@Override
+	public List<Client> getClients() {
+		List<Client> clients = new ArrayList<>();
+		clientRepository.findAll().forEach(c->{
+			clients.add(c);
+		});
+		return clients;
+	}
+	@Override
+	public String offStatut(String email) {
+		Utilisateur user = utilisateurRepository.findUtilisateurByEmail(email);
+		user.setStatut(false);
+		return "Statut de l'utilisateur "+ email+" est modifier !";
+	}
+	@Override
+	public long getCountClient() {
+		List<Client> clients = new ArrayList<>();
+		long count = 0;
+		clientRepository.findAll().forEach(c->{
+			clients.add(c);
+		});
+		return clients.size();
+	}
+	@Override
+	public String onStatut(String email) {
+		Utilisateur user = utilisateurRepository.findUtilisateurByEmail(email);
+		user.setStatut(true);
+		return "Statut de l'utilisateur "+ email+" est modifier !";
+	}
 
 }
