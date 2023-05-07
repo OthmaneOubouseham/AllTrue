@@ -1,7 +1,10 @@
 package com.example.demo.service;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.entity.Client;
 import com.example.demo.entity.Resultat;
@@ -20,5 +23,7 @@ public interface AllTrueInitServie {
 	public String offStatut(String email);
 	public String onStatut(String email);
 	public long getCountClient();
+	public String uploadImage(MultipartFile file) throws IOException;
+	public byte[] downoalImage(String fileName);
 	
 }
